@@ -1,0 +1,292 @@
+/*
+Background	#EFECCA  Sandy
+Border   	#A7A37E    Wet Sand
+Filling 	#6F3900 	 Palm
+Fontcolor 	#E68927  Orange Sun
+*/
+
+html {
+	background-color: #046380;;
+	font-family: "Tahoma";
+	margin-left: 10%; margin-right: 10%;
+
+}
+body {
+	margin-left: 7%;
+	margin-right: 7%;
+	padding-left: 1em;
+	padding-right: 1em;
+	border: 7px solid #A7A37E;
+	margin: 10px;
+	background: #EFECCA;
+	width:100%;
+	min-width:800px;
+}
+
+/*Header*/
+#header {
+	border-bottom: 7px solid #6F3900;
+	border-color: #6F3900;
+	min-height: 125px;
+	width: 100%;
+	height:50px;
+	min-width: 700px;
+}
+
+#h_logo{
+	width:20%;
+	height:100%;
+	display:block;
+	float:left;
+}
+
+#h_logo a {
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+#h_logo img {
+	width:200px;
+	height:140px;
+	display: block;
+}
+
+#h_navbar{
+	width:75%;
+	padding-top:50px;
+	margin: 5px;
+	float:right;
+	text-align:left;
+}
+
+#h_navbar ul li{
+	width:15%;
+	height: 50px;
+	font-size:120%;
+	background: #6F3900;
+	display: inline-block;
+	padding-right: 2%;
+	padding-left: 2%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#h_navbar ul li:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+#h_navbar ul li a {
+	vertical-align: middle;
+  display: inline-block;
+}
+
+#h_navbar ul a:hover li {
+	background-color: #369;
+	color: #fff;
+}
+
+/*Footer*/
+#footer {
+	border-bottom: 7px solid #6F3900;
+	border-color: #6F3900;
+	min-height: 120px;
+	min-width: 700px;
+	background-color: #6F3900;
+	color: white;
+	width: 100%;
+	margin-bottom: 2%;
+	vertical-align:center;
+}
+
+#f_left{
+	font-size: 0.8em;
+	width:2%;
+	float: left;
+	vertical-align:center;
+	padding-left:2%;
+	
+}
+
+#f_left p {
+	height:100%;
+	display: inline-block;
+	vertical-align:center;
+}
+
+#f_left p:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+#f_center{
+	width:50%;
+	font-size: 0.8em;
+	list-style: none;
+	margin-left: 25%;
+	margin-right: 25%;
+	border-left: 1px solid #EFECCA;
+	border-right: 1px solid #EFECCA;
+}
+
+#f_center p{
+	margin: 0px;
+	text-align:center;
+}
+
+#f_center table{
+	text-align:center;
+	width:100%
+}
+
+#f_center table td{
+	vertical-align: top;
+	width:20%; /* 100 / # of categories */
+}
+#f_center table td ul{
+	list-style: none;
+	padding:0;
+	text-align:center;
+}
+
+#f_right{
+	padding-right:2%;
+	float: right;
+	font-size: 0.8em;
+	width: 22%;
+	height:auto;
+	color: white;
+	
+}
+
+/*Content*/
+#content{
+	min-height: 350px;
+}
+
+#c_left{
+	font-size: 1.4em;
+	width:18%;
+	float: left;
+}
+
+#c_left ul li {
+	list-style: none;
+	background: #6F3900;
+	padding: 2%;
+	padding-right: 2%;
+	padding-left: 2%;
+	border: 1px solid black;
+	text-align: center;
+}
+
+#c_left ul li:hover {
+	background-color: #369;
+	color: #fff;
+}
+
+
+#c_left ul li#current {
+	background:darkred;
+}
+
+#c_content{
+	width:60%;
+	font-size: 0.8em;
+	list-style: none;
+	margin-left: 20%;
+	margin-right: 30%;
+}
+
+/*Other*/
+
+.link {
+	padding: 5px;
+	background: #6F3900;
+}
+
+.review {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.rating {
+	font-size: 1.2em;
+	color: #6F3900;
+	text-decoration: underline;
+	margin-left: 10%;
+}
+
+/* General Items */
+header {
+	margin: 30px;
+	color:#25201B;
+	font-size: 2em;
+	font-style: italic;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+h1 {
+	font-weight: bold;
+	color: #6F3900;
+	text-align: center;
+	font-size: 2em;
+}
+h2 {
+	font-weight: bold;
+}
+
+form {
+	background: #A7A37E;
+	border: 1px solid #6F3900;
+	width: 50%;
+	margin-bottom: 1%;
+	margin-left: 25%;
+}
+
+form p {
+	width: 100%;
+	display:inline-block;
+	text-align:left;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+form p input {
+	float: none;
+	display:inline-block;
+}
+
+form p input[type="radio"] {
+	float: none;
+	width: 2%;
+	text-align:left;
+}
+
+/*Images*/
+figure {
+	border: 4px solid #6F3900;
+	margin-top: -80px;
+	background: #6F3900;
+	float: right;
+	clear: both;
+}
+		
+figcaption {
+	font-size: 0.85em;
+	color: #E68927;
+	font-style: italic;
+	text-align: center;
+}
+
+/*Links*/
+a  {text-decoration: none}
+a:link { color: #E68927;}
+a:visited { color: #E68927;}
+a:hover { text-decoration: underline;}
