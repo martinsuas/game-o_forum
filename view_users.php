@@ -14,22 +14,27 @@ echo '<h1>Latest Users</h1>';
 require('../game-o_forum_includes/mysqli_connect.php');
 
 // Make query
-$q = "SELECT username, DATE_FORMAT(registration_date, '%M %d, %Y') AS regd
+$q = "SELECT user_id, username, DATE_FORMAT(registration_date, '%M %d, %Y') AS regd
 	  FROM user
-	  ORDER BY regd
-	  LIMIT 3";
+	  ORDER BY registration_date DESC
+	  LIMIT 10";
 	  
 $r = @mysqli_query($dbc, $q);
 
 if ($r) {
 	// Table header
-	echo '<table align="center" cellspacing="3" cellpadding="3" width="75%">
+	echo '<table class="q_result" align="center" cellspacing="2" cellpadding="2" width="50%">
 		    <tr><td align="left"><b>Name</b></td>
-				<td align="left"><b>Date Registered</b></td></tr>';
+				<td align="left"><b>Date Registered</b>
+				<td align="left"><b>Update</b>
+				<td align="left"><b>Delete</b></td></tr>';
 	
 	while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-		echo '<tr><td align="left">' . $row['username'] . '</td>' . 
-				  '<td align="left">' . $row['regd'] . '</td></tr>';
+		echo '<tr><td align="left">' . $row['username'] . '</td>' .
+			     '<td align="left">' . $row['regd'] . '</td>' .
+				 '<td align="left"><a href="edit_user.php?id=' . $row['user_id'] . '">Edit</a></td>' .
+				 '<td align="left"><a href="delete_user.php?id=' . $row['user_id'] . '">Delete</a></td>' .
+			  '</tr>';
 	}
 	
 	echo '</table>';

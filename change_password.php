@@ -13,7 +13,9 @@ include( 'includes/header.html');
 // FUNCTIONS  //
 //~~~~~~~~~~~~//
 /**
- * @param  string   $name  Reference name.	
+ * @param  string   $name  Reference name.
+ *
+ * e.g. <input type='text' name='somename' size=20 value='{IF SET somevalue}' />
  */
 function create_textbox($name, $maxlength=20, $size=20, $email=false) {
 	echo '<input type="';
@@ -41,6 +43,7 @@ function create_date($name) {
 /**
  * @param  string   $name  Reference name.	
  * @param  string   $value Value of radio option
+ * e.g. <input type='radio' name='somename' value='somevalue' checked='{IF CHECKED checked}'/>
  */
 function create_radio($name, $value) {
 	echo '<input type="radio" name="' . $name . '" value="' . $value . '"';
@@ -53,6 +56,7 @@ function create_radio($name, $value) {
 /**
  * @param  string   $name  Reference name.	
  * @param  string   $value Value of multiselect option
+ * e.g. <option value='somevalue' selected='{IF SELECTED selected}'/>
  */
 function create_option($name, $value, $text) {
 	echo '<option value="' . $value . '"';
