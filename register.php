@@ -70,7 +70,7 @@ function create_option($name, $value, $text) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-	require('../../../htdocs_includes/mysqli_connect.php'); // Connect to DB
+	require('../game-o_forum_includes/mysqli_connect.php'); // Connect to DB
 	$errors = array();
 
 	// Check username

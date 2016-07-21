@@ -11,7 +11,7 @@ include( 'includes/header.html');
 
 echo '<h1>Latest Users</h1>';
 
-require('../../../htdocs_includes/mysqli_connect.php');
+require('../game-o_forum_includes/mysqli_connect.php');
 
 // Make query
 $q = "SELECT username, DATE_FORMAT(registration_date, '%M %d, %Y') AS regd
