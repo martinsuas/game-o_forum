@@ -9,64 +9,7 @@
 	
 $page_title = "Register";
 include( 'includes/header.html');
-
-//~~~~~~~~~~~~//
-// FUNCTIONS  //
-//~~~~~~~~~~~~//
-/**
- * @param  string   $name  Reference name.	
- */
-function create_textbox($name, $maxlength=20, $size=20, $email=false) {
-	echo '<input type="';
-	// Check if e-mail
-	if (!$email)  echo 'text';  else echo 'email';
-	// Continue building textbox
-	echo '" name="' . $name 
-	. '" size="' . $size . '" maxlength="' . $maxlength .'" value="';
-	// Check for stickiness
-	if (isset($_POST[$name])) echo $_POST[$name];
-	echo '"/>';
-}
-
-
-function create_password_textbox($name, $maxlength=40, $size=20) {
-	echo '<input type="password" name="' . $name 
-	. '" size="' . $size . '" maxlength="' . $maxlength . '" />';
-}
-
-function create_date($name) {
-	echo '<input type="date" name="dob" value="';
-	if (isset($_POST[$name])) echo $_POST[$name];
-	echo '">';
-}
-
-/**
- * @param  string   $name  Reference name.	
- * @param  string   $value Value of radio option
- */
-function create_radio($name, $value) {
-	echo '<input type="radio" name="' . $name . '" value="' . $value . '"';
-	// Check for stickiness
-	if (isset($_POST[$name]) && ($_POST[$name] == $value))
-		echo 'checked="checked"';
-	echo "/>$value &nbsp";
-}
-
-/**
- * @param  string   $name  Reference name.	
- * @param  string   $value Value of multiselect option
- */
-function create_option($name, $value, $text) {
-	echo '<option value="' . $value . '"';
-	// Check for stickiness
-	if (isset($_POST[$name]) && ($_POST[$name] == $value))
-		echo 'selected="selected"';
-	echo "/>$text";
-}
-
-//~~~~~~~~~~~~~~~~~~//
-// FORM SUBMISSION  //
-//~~~~~~~~~~~~~~~~~~//
+include('functions/form.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {

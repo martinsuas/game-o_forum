@@ -94,7 +94,7 @@ def create_users (num_users):
             first_name = M_NAMES[random.randint(0, len(M_NAMES)-1)]
             gender = "Male"
         last_name = LAST_NAMES[random.randint(0, len(LAST_NAMES)-1)]
-        username = first_name.lower() + str(i)
+        username = first_name.lower() + str(i+1)
         email = username + "@" + EMAILS[random.randint(0, len(EMAILS)-1)]
         registration_date = random_datetime(CREATION_DATE, datetime.now())
         dob = random_date(datetime.strptime("1940", "%Y"), datetime.strptime("2003", "%Y"))

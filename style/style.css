@@ -243,6 +243,24 @@ body {
 	background: #E68927;
 }
 
+.pagination {
+	border: 1px solid #b26023;
+	background: #6F3900;
+	margin-bottom: 2%;
+	padding: 1px;
+
+}
+.pagination tr td a {
+	color: #E68927;
+}
+.pagination tr td {
+	width: 9%;
+}
+
+.current {
+	font-weight: bold;
+	text-decoration: underline;
+}
 header {
 	margin: 30px;
 	color:#25201B;
@@ -269,6 +287,7 @@ form {
 	width: 50%;
 	margin-bottom: 1%;
 	margin-left: 25%;
+	font-weight: bold;
 }
 
 form p {
@@ -288,6 +307,13 @@ form p input[type="radio"] {
 	float: none;
 	width: 2%;
 	text-align:left;
+}
+
+form p input[type="submit"] {
+	margin-left: 40%;
+	width: 20%;
+	font-size:14px;
+	text-align: center;
 }
 
 /*Images*/
