@@ -15,10 +15,11 @@ require('../game-o_forum_includes/mysqli_connect.php');
 
 if (isset($_GET['thread_id'])) {
     $thread_id = $_GET['thread_id'];
-    $q = "SELECT title FROM thread WHERE thread_id=thread_id";
+    $q = "SELECT title, forum_id FROM thread WHERE thread_id=thread_id";
     $r = mysqli_query($dbc, $q);
     $row = mysqli_fetch_row($r);
     $title = $row[0];
+    $forum_id = $row[1];
 } else {
     echo '<p class="error"><b>Thread does not exist.</b>
            <br>Please go back or try again later.</p>';
@@ -68,6 +69,11 @@ $start = (($page-1) * $display);
 echo '<div id="c_content">';
 
 echo "<h1>$title</h1>";
+
+if (isset($forum_id)) {
+    echo '<a href="forum.php?forum_id=' . $forum_id . '">Back</a>';
+}
+
 $q = "SELECT message_id, message, date_posted, user_id, username
       FROM message NATURAL JOIN user
       WHERE message.thread_id=$thread_id

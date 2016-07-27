@@ -263,6 +263,14 @@ body {
 	background: #E68927;
 }
 
+.forum {
+	width:50%;
+	border: 1px solid #6F3900;
+	background: #A7A37E;
+	font-size: 24px;
+	text-align: center;
+}
+
 .thread {
 	border: 1px solid #6F3900;
 	background: #b26023;

@@ -70,7 +70,7 @@ if ($r) {
 				<td><b>Delete</b></td></tr>';
 	
 	while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-		echo '<tr><td>' . $row['username'] . '</td>' .
+		echo '<tr><td><a href="view_user.php?user_id=' . $row['user_id'] . '">'.$row['username'].'</a></td>' .
 			     '<td>' . $row['regd'] . '</td>' .
 				 '<td><a href="edit_user.php?user_id=' . $row['user_id'] . '">Edit</a></td>' .
 				 '<td><a href="delete_user.php?user_id=' . $row['user_id'] . '">Delete</a></td>' .

@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         setcookie('user_id', $data['user_id']);
         setcookie('username', $data['username']);
         // Redirect
-        redirect_user('index.php');
+        redirect_user('home.php');
     } else {
         $errors = $data;
     }

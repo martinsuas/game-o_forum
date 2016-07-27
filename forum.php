@@ -16,10 +16,11 @@ require('../game-o_forum_includes/mysqli_connect.php');
 
 if (isset($_GET['forum_id'])) {
     $forum_id = $_GET['forum_id'];
-    $q = "SELECT name FROM forum WHERE forum_id=$forum_id";
+    $q = "SELECT name, parent_id FROM forum WHERE forum_id=$forum_id";
     $r = mysqli_query($dbc, $q);
     $row = mysqli_fetch_row($r);
     $name = $row[0];
+    $parent_id = $row[1];
 } else {
     $forum_id = 0; // 0 indicates the forums choice menu.
     $name = "Welcome to the forums!";
@@ -86,6 +87,10 @@ if ($r) {
         }
     }
 
+    if (isset($parent_id)) {
+        echo '<a href="forum.php?forum_id=' . $parent_id . '">Back</a>';
+    }
+
     while ($row = mysqli_fetch_assoc($r)) {
         echo '<p class="forum"><a href="forum.php?forum_id=' . $row['forum_id'] . '">' .
                     $row['name'] . '</a></p>';
@@ -97,7 +102,9 @@ if ($r) {
 $q = "SELECT thread_id, title, date_created, user_id, username
       FROM thread NATURAL JOIN user
       WHERE thread.forum_id=$forum_id
-      LIMIT $start, $display";
+      ORDER BY date_created DESC
+      LIMIT $start, $display
+      ";
 
 $r = mysqli_query($dbc, $q);
 
