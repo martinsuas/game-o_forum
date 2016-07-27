@@ -18,13 +18,27 @@
 		</a>
 	</div>
 
+	<div id="h_userbar">
+		<?php
+			if (isset($_COOKIE['username']) and basename($_SERVER['PHP_SELF']) != 'logout.php') {
+				echo '<ul><li><a href="home.php">[' . $_COOKIE['username'] . ']</a></li>' .
+					     '<li><a href="logout.php">[Log Out]</a></li>
+						 </ul>';
+			} else {
+				echo '<ul>
+						<li><a href="register.php">[Register]</a></li>
+						<li><a href="login.php">[Log In]</a></li>
+						</ul>';
+			}
+		?>
+
+	</div>
 	<div id="h_navbar">
 		<ul>
-			<li><a href="index.php">Home Page</a></li>
-			<li><a href="register.php">Register</a></li>
-			<li><a href="view_users.php">View User</a></li>
-			<li><a href="change_password.php">Change Password</a></li>
-			<li><a href="#">Comming Soon...</a></li>
+			<?php echo ($page_title=='Homepage' ? '<li id="current">' : '<li>'); ?><a href="index.php">Home Page</a></li>
+			<?php echo ($page_title=='Forum' ? '<li id="current">' : '<li>'); ?><a href="forum.php">Forum</a></li>
+			<?php echo ($page_title=='Manage Users' ? '<li id="current">' : '<li>'); ?><a href="view_users.php">Manage Users</a></li>
+			<?php echo ($page_title=='Change Password' ? '<li id="current">' : '<li>'); ?><a href="change_password.php">Change Password</a></li>
 		</ul>
 	</div>
 </div>

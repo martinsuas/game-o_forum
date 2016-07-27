@@ -99,8 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 ?>
 <!--HTML Start-->
+<div id="c_content">
 <h1>Welcome to Game-o Forums!</h1>
-<h2>Please enter the following information to register</h2>
+<h2>Please enter the following information to register.</h2>
 <form action="register.php" method="post">
 	<p>Username: <?php create_textbox('username'); ?></p>
 	<p>Password: <?php create_password_textbox('passA'); ?></p>
@@ -117,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	<p>Date of birth: <?php create_date('dob') ?></p>
 	<p><input type="submit" name="submit" value="Submit" /></p>
 </form>
+</div>
 <!--HTML End-->
 
 <?php include( 'includes/footer.html' ); ?>

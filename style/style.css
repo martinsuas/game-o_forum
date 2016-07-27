@@ -28,9 +28,8 @@ body {
 #header {
 	border-bottom: 7px solid #6F3900;
 	border-color: #6F3900;
-	min-height: 125px;
+	min-height: 100px;
 	width: 100%;
-	height:50px;
 	min-width: 700px;
 }
 
@@ -52,15 +51,30 @@ body {
 }
 
 #h_logo img {
-	width:200px;
-	height:140px;
+	width:160px;
+	height:110px;
 	display: block;
+	padding-left: 10%;
+}
+
+#h_userbar {
+	width: 100%;
+	text-align: right;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+#h_userbar ul {
+	padding-right: 2%;
+}
+
+#h_userbar ul li {
+	padding-left: 1%;
+	display: inline-block;
 }
 
 #h_navbar{
 	width:75%;
-	padding-top:50px;
-	margin: 5px;
 	float:right;
 	text-align:left;
 }
@@ -77,6 +91,12 @@ body {
 	vertical-align: middle;
 }
 
+
+#h_navbar ul li#current {
+	background: #864300;
+}
+
+
 #h_navbar ul li:before {
 	content: '';
 	display: inline-block;
@@ -86,7 +106,7 @@ body {
 
 #h_navbar ul li a {
 	vertical-align: middle;
-  display: inline-block;
+	display: inline-block;
 }
 
 #h_navbar ul a:hover li {
@@ -243,6 +263,48 @@ body {
 	background: #E68927;
 }
 
+.thread {
+	border: 1px solid #6F3900;
+	background: #b26023;
+	margin-bottom: 2%;
+	padding: 1px;
+}
+
+.thread tr:first-child {
+	background: #6F3900;
+	color: #E68927
+}
+
+.thread tr:nth-child(even) {
+	background: #E68927;
+}
+
+.thread td:nth-child(1){width:70%;}
+.thread td:nth-child(2){width:13%;}
+.thread td:nth-child(3){width:17%;}
+
+
+.message {
+	border: 1px solid #6F3900;
+	background: #b26023;
+	margin-bottom: 2%;
+	padding: 1px;
+}
+
+.message tr:first-child {
+	background: #6F3900;
+	color: #E68927
+}
+
+.message tr:nth-child(even) {
+	background: #E68927;
+}
+
+.message td:nth-child(1){width:13%;}
+.message td:nth-child(2){width:80%;}
+.message td:nth-child(3){width:17%;}
+
+
 .pagination {
 	border: 1px solid #b26023;
 	background: #6F3900;
@@ -261,6 +323,7 @@ body {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
 header {
 	margin: 30px;
 	color:#25201B;
@@ -279,14 +342,15 @@ h1 {
 }
 h2 {
 	font-weight: bold;
+	color: #E68927;
 }
 
 form {
 	background: #A7A37E;
 	border: 1px solid #6F3900;
-	width: 50%;
+	width: 80%;
+	margin-left:10%;
 	margin-bottom: 1%;
-	margin-left: 25%;
 	font-weight: bold;
 }
 

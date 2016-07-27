@@ -6,7 +6,7 @@
  */
 	
 	
-$page_title = "Change Your Password";
+$page_title = "Change Password";
 include( 'includes/header.html');
 
 //~~~~~~~~~~~~//
@@ -159,6 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 } // End of submit conditional
 ?>
 <!--HTML Start-->
+<div id="c_content">
 <h1>Change your password:</h1>
 <h2>Please enter the following information to update your password.</h2>
 <form action="change_password.php" method="post">
@@ -168,6 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	<p>Confirm New Password: <?php create_password_textbox('passB'); ?></p>
 	<p><input type="submit" name="submit" value="Submit" /></p>
 </form>
+</div>
 <!--HTML End-->
 
 <?php include( 'includes/footer.html' ); ?>
