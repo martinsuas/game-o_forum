@@ -53,7 +53,7 @@ function validate_login($dbc, $username = '', $password = '' ) {
             $errors[] = 'The email address and password information do not match those on file.';
         }
     }
-    return [false, $errors];
+    return array(false, $errors);
 }
 
 

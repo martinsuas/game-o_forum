@@ -11,10 +11,11 @@
 
 
 $page_title = "Home";
+$root = $_SERVER['DOCUMENT_ROOT'];
 
-include('includes/header.html');
+include($root . '/includes/header.html');
 
-require('../game-o_forum_includes/mysqli_connect.php');
+require($root  . '/../connection/mysqli_connect.php');
 
 
 if (isset($_GET['display']) and is_numeric($_GET['display'])) {
@@ -83,9 +84,9 @@ if (isset($_COOKIE['username']) and isset($_COOKIE['user_id'])) {
 
             while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
                 echo '<tr>' .
-                    '<td><a href="thread.php?thread_id=' . $row['thread_id'] . '">' .
+                    '<td><a href="/forum/thread.php?thread_id=' . $row['thread_id'] . '">' .
                     $row['title'] . '</a></td>' .
-                    '<td><a href="view_user.php?user_id=' . $row['user_id'] . '">' .
+                    '<td><a href="/community/view_user.php?user_id=' . $row['user_id'] . '">' .
                     $row['username'] . '</a></td>' .
                     '<td>' . $row['date_created'] . '</td>' .
                     '</tr>';
@@ -93,8 +94,8 @@ if (isset($_COOKIE['username']) and isset($_COOKIE['user_id'])) {
 
             echo '</table>';
 
-            include( 'functions/pagination.php');
-            paginate("home.php?&", $page, $pages, $display);
+            include($root . '/includes/pagination.php');
+            paginate("index.php?&", $page, $pages, $display);
         }
     } else {
         echo '<p class="error">There was an issue in accessing the database.
@@ -105,8 +106,8 @@ if (isset($_COOKIE['username']) and isset($_COOKIE['user_id'])) {
 
     echo '</div>';
 } else {
-    require('functions/login.inc.php');
+    require($root . '/includes/login.inc.php');
     redirect_user();
 }
 
-include('includes/footer.html');
+include($root . '/includes/footer.html');

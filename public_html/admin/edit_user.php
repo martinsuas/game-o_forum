@@ -6,15 +6,17 @@
  * Time: 7:07 PM
  *
  * This page allows to update a user from a database.
- * Accessed through view_users.php
+ * Accessed through index.php
  */
 $page_title = "Update user";
-include('includes/header.html');
-include('functions/form.php');
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+include($root . '/includes/header.html');
+include($root . '/includes/form.php');
 
 if (@$_COOKIE['username'] != 'admin') {
     echo '<h1>Access denied. Please log in as an admin.</h1>';
-    include('includes/footer.html');
+    include($root . '/includes/footer.html');
     exit();
 }
 
@@ -28,11 +30,11 @@ elseif ( isset($_POST['user_id']) and is_numeric($_POST['user_id'])) {
 }
 else {
     echo '<p class="error">This page has been accessed due an error. Please go back Nsa.</p>';
-    include('includes/footer.html');
+    include($root . '/includes/footer.html');
     exit();
 }
 
-require_once ('../game-o_forum_includes/mysqli_connect.php');
+require_once($root  . '/../connection/mysqli_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = array();
@@ -114,5 +116,5 @@ else { // FORM
     }
 
     mysqli_close($dbc);
-    include('includes/footer.html');
+    include($root . '/includes/footer.html');
 }

@@ -7,7 +7,7 @@
  */
 
 $page_title = "Login";
-include('includes/header.html');
+include($root . '/includes/header.html');
 
 echo '<h1>Login</h1>';
 
@@ -26,4 +26,4 @@ if (isset($errors) and !empty($errors)) {
     <p><input type="submit" name="submit" value="Submit"/></p>
 </form>
 
-<?php include('includes/footer.html');
+<?php include($root . '/includes/footer.html');

@@ -8,10 +8,11 @@
 
 
 $page_title = "Forum";
+$root = $_SERVER['DOCUMENT_ROOT'];
 
-include('includes/header.html');
+include($root . '/includes/header.html');
 
-require('../game-o_forum_includes/mysqli_connect.php');
+require($root  . '/../connection/mysqli_connect.php');
 
 if (isset($_GET['thread_id'])) {
     $thread_id = $_GET['thread_id'];
@@ -71,7 +72,7 @@ echo '<div id="c_content">';
 echo "<h1>$title</h1>";
 
 if (isset($forum_id)) {
-    echo '<a href="forum.php?forum_id=' . $forum_id . '">Back</a>';
+    echo '<a href="?forum_id=' . $forum_id . '">Back</a>';
 }
 
 $q = "SELECT message_id, message, date_posted, user_id, username
@@ -91,7 +92,7 @@ if ($r) {
 
         while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
             echo '<tr>' .
-                '<td><a href="view_user.php?user_id=' . $row['user_id'] . '">' .
+                '<td><a href="/community/view_user.php?user_id=' . $row['user_id'] . '">' .
                 $row['username'] . '</a></td>' .
                 '<td>' . $row['message'] . '</td>' .
                 '<td>' . $row['date_posted'] . '</td>' .
@@ -101,8 +102,8 @@ if ($r) {
         echo '</table>';
         echo '</div>';
 
-        include( 'functions/pagination.php');
-        paginate("thread.php?thread_id=$thread_id&", $page, $pages, $display);
+        include($root . '/includes/pagination.php');
+        paginate("?thread_id=$thread_id&", $page, $pages, $display);
     }
 } else {
     echo '<p class="error">There was an issue in accessing the database.
@@ -113,4 +114,4 @@ if ($r) {
 
 echo '</div>';
 
-include('includes/footer.html');
+include($root . '/includes/footer.html');

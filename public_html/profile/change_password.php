@@ -7,7 +7,9 @@
 	
 	
 $page_title = "Change Password";
-include( 'includes/header.html');
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+include($root . '/includes/header.html');
 
 //~~~~~~~~~~~~//
 // FUNCTIONS  //
@@ -72,7 +74,7 @@ function create_option($name, $value, $text) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-	require('../game-o_forum_includes/mysqli_connect.php'); // Connect to DB
+	require($root  . '/../connection/mysqli_connect.php'); // Connect to DB
 	$errors = array();
 
 	// Check username
@@ -172,6 +174,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 <!--HTML End-->
 
-<?php include( 'includes/footer.html' ); ?>
+<?php include($root . '/includes/footer.html'); ?>
 
 		
