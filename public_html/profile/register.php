@@ -8,12 +8,14 @@
 	
 	
 $page_title = "Register";
-include( 'includes/header.html');
-include('functions/form.php');
+$root = $_SERVER['DOCUMENT_ROOT'];
+
+include($root . '/includes/header.html');
+include($root . '/includes/form.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-	require('../game-o_forum_includes/mysqli_connect.php'); // Connect to DB
+	require($root  . '/../connection/mysqli_connect.php'); // Connect to DB
 	$errors = array();
 
 	// Check username
@@ -72,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	if (empty($errors)) {
 		// Register the user into the database
 
-		$q = "INSERT INTO user (username, password, email, registration_date, dob, gender) VALUES ('$username', SHA1('$password'), '$email', UTC_TIMESTAMP(),  '$dob', '$gender')";
+		$q = "INSERT INTO user (username, password, email, registration_date, dob, gender) 
+			  VALUES ('$username', SHA1('$password'), '$email', UTC_TIMESTAMP(),  '$dob', '$gender')";
 		$r = @mysqli_query($dbc, $q);
 
 		if ($r) {
@@ -87,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		// Close connection and exit script
 		mysqli_close($dbc);
 
-		include('includes/footer.html');
+		include($root . '/includes/footer.html');
 		exit();
 	}
 	else {
@@ -121,6 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 <!--HTML End-->
 
-<?php include( 'includes/footer.html' ); ?>
+<?php include($root . '/includes/footer.html'); ?>
 
 		

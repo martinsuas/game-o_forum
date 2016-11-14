@@ -5,22 +5,23 @@
  * Date: 7/26/2016
  * Time: 4:28 PM
  */
-
 $page_title = "Forum";
+$root = $_SERVER['DOCUMENT_ROOT'];
 
-include('includes/header.html');
+include('../includes/header.html');
+require_once('../../connection/pdo_connect.php');
 
-require('../game-o_forum_includes/mysqli_connect.php');
 
 // GET checkers
-
 if (isset($_GET['forum_id'])) {
     $forum_id = $_GET['forum_id'];
-    $q = "SELECT name, parent_id FROM forum WHERE forum_id=$forum_id";
-    $r = mysqli_query($dbc, $q);
-    $row = mysqli_fetch_row($r);
-    $name = $row[0];
-    $parent_id = $row[1];
+    $sql = "SELECT name, parent_id FROM forum WHERE forum_id = :forum_id";
+    $params = [':forum_id' => [$forum_id, PDO::PARAM_INT]];
+    $stmt = $pdo->query_param($sql, $params);
+    if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+        $name = $row[0];
+        $parent_id = $row[1];
+    }
 } else {
     $forum_id = 0; // 0 indicates the forums choice menu.
     $name = "Welcome to the forums!";
@@ -37,12 +38,12 @@ if (isset($_GET['pages']) and is_numeric($_GET['pages'])) {
     $pages = $_GET['pages'];
 } else {
     // Count the number to be displayed
-    $q = "SELECT COUNT(thread_id)
+    $sql = "SELECT COUNT(thread_id)
           FROM thread
-          WHERE thread.forum_id=$forum_id";
-
-    $r = mysqli_query($dbc, $q);
-    $row = @mysqli_fetch_row($r);
+          WHERE thread.forum_id=:forum_id";
+    $params = [':forum_id' => [$forum_id, PDO::PARAM_INT]];
+    $stmt = $pdo->query_param($sql, $params);
+    $row = $stmt->fetch(PDO::FETCH_BOTH);
     $num_records = $row[0];
 
     // Calculate pages
@@ -68,18 +69,17 @@ if (isset($_GET['page'])) {  // Start already determined
 echo '<div id="c_content">';
 
 // Make query
-$q = "SELECT forum_id, name
+$sql = "SELECT forum_id, name
       FROM forum
-      WHERE parent_id = $forum_id";
+      WHERE parent_id = :parent_id";
+$params = [':parent_id' => [$forum_id, PDO::PARAM_INT]];
+$stmt = $pdo->query_param($sql, $params);
 
-$r = mysqli_query($dbc, $q);
-
-
-if ($r) {
+if ($stmt) {
 
     echo "<h1>$name</h1>";
 
-    if (mysqli_num_rows($r) != 0) {
+    if ($stmt->rowCount() != 0) {
         if ($forum_id == 0) {
             echo '<h2>Main Forums:</h2>';
         } else {
@@ -88,28 +88,32 @@ if ($r) {
     }
 
     if (isset($parent_id)) {
-        echo '<a href="forum.php?forum_id=' . $parent_id . '">Back</a>';
+        echo '<a href="index.php?forum_id=' . $parent_id . '">Back</a>';
     }
 
-    while ($row = mysqli_fetch_assoc($r)) {
-        echo '<p class="forum"><a href="forum.php?forum_id=' . $row['forum_id'] . '">' .
+    while ($row = $stmt->fetch(PDO::FETCH_BOTH)) {
+        echo '<p class="forum"><a href="index.php?forum_id=' . $row['forum_id'] . '">' .
                     $row['name'] . '</a></p>';
     }
 }
 
 // Display threads, if any exist
 
-$q = "SELECT thread_id, title, date_created, user_id, username
+$sql = "SELECT thread_id, title, date_created, user_id, username
       FROM thread NATURAL JOIN user
-      WHERE thread.forum_id=$forum_id
+      WHERE thread.forum_id=:forum_id
       ORDER BY date_created DESC
-      LIMIT $start, $display
+      LIMIT :start, :display
       ";
+$params = [
+    ':forum_id' => [$forum_id, PDO::PARAM_INT],
+    ':start' => [$start, PDO::PARAM_INT],
+    ':display' => [$display, PDO::PARAM_INT]
+];
+$stmt = $pdo->query_param($sql, $params);
 
-$r = mysqli_query($dbc, $q);
-
-if ($r) {
-    if (mysqli_num_rows($r) != 0) {
+if ($stmt) {
+    if ($stmt->rowCount() != 0) {
         // Table header
         echo '<table class="thread" align="center" cellspacing="2" cellpadding="2" width="100%">
 		    <tr><td><b>Title</b></td>
@@ -120,7 +124,7 @@ if ($r) {
             echo '<tr>' .
                 '<td><a href="thread.php?thread_id=' . $row['thread_id'] . '">' .
                 $row['title'] . '</a></td>' .
-                '<td><a href="view_user.php?user_id=' . $row['user_id'] . '">' .
+                '<td><a href="/community/view_user.php?user_id=' . $row['user_id'] . '">' .
                 $row['username'] . '</a></td>' .
                 '<td>' . $row['date_created'] . '</td>' .
                 '</tr>';
@@ -129,16 +133,11 @@ if ($r) {
         echo '</table>';
         echo '</div>';
 
-        include( 'functions/pagination.php');
-        paginate("forum.php?forum_id=$forum_id&", $page, $pages, $display);
+        include($root . '/includes/pagination.php');
+        paginate("index.php?forum_id=$forum_id&", $page, $pages, $display);
     }
-} else {
-    echo '<p class="error">There was an issue in accessing the database.
-	We apologize for this inconvenience.';
-
-    echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
 }
 
 echo '</div>';
 
-include('includes/footer.html');
+include($root . '/includes/footer.html');

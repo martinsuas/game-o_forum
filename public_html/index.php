@@ -13,7 +13,7 @@ function create_ad() {
 	echo '<p class="ad">ADVERTISEMENT!</p>';
 }
 $page_title = "Homepage";
-include( 'includes/header.html');
+include('includes/header.html');
 
  ?>
 <div id="c_content">
@@ -24,8 +24,8 @@ include( 'includes/header.html');
         of my current mastery of these languages. Please, be aware that this website utilizes cookies.
     </p>
 
-    <p>All registered users can login and logout. Pre-registered users all have the password: "hello", although
-        specific user features are still to be implemented. Anyone can create a user and log in into the system.
+    <p>All registered users can login and logout. Pre-registered users all have the password: "hello".
+        Specific user features are still to be implemented. Anyone can create a user and log in into the system.
     </p>
 
     <p>
@@ -58,6 +58,6 @@ include( 'includes/header.html');
 
 
 <?php
-include( 'includes/footer.html' ); ?>
+include('includes/footer.html'); ?>
 
 		

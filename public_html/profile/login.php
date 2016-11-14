@@ -8,9 +8,11 @@
  * Processes login form submission
  */
 
+$root = $_SERVER['DOCUMENT_ROOT'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require('functions/login.inc.php');
-    require( '../game-o_forum_includes/mysqli_connect.php');
+    require($root . '/includes/login.inc.php');
+    require($root  . '/../connection/mysqli_connect.php');
 
     // Check log in
     list($validated, $data) = validate_login($dbc, $_POST['username'], $_POST['password']);
@@ -19,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         setcookie('user_id', $data['user_id']);
         setcookie('username', $data['username']);
         // Redirect
-        redirect_user('home.php');
+        redirect_user('index.php');
     } else {
         $errors = $data;
     }
 }
 // Create page
-include('includes/user_login.inc.php');
+include($root . '/includes/user_login.inc.php');

@@ -5,9 +5,11 @@
  * Date: 7/27/2016
  * Time: 6:26 PM
  */
+$root = $_SERVER['DOCUMENT_ROOT'];
 $page_title = "User Page";
-include('includes/header.html');
-require_once('../game-o_forum_includes/mysqli_connect.php');
+
+include($root . '/includes/header.html');
+require($root  . '/../connection/mysqli_connect.php');
 
 if (isset($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
@@ -41,4 +43,4 @@ if (isset($_GET['user_id'])) {
     }
 }
 
-include('includes/footer.html');
+include($root . '/includes/footer.html');
