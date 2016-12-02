@@ -1,63 +1,112 @@
-<?php   # Script 3.4 - index.php
-		# Created 01/11/2016
-		# Created by Martin Suarez
-		# This script experiments with using multiple files.
-		# 
-		# Script 3.7 - update #2
-		# Created 02/26/2016
-		# Created by Martin Suarez
-		# Added functions to the website
-		
-// Adds an ad.
-function create_ad() {
-	echo '<p class="ad">ADVERTISEMENT!</p>';
-}
-$page_title = "Homepage";
-include('includes/header.html');
-
- ?>
-<div id="c_content">
-    <h1>Welcome</h1>
-    <h2>About this website...</h2>
-    <p>Welcome to Game-o Forum! This sample website is created using PHP, MySQL, and will eventually include
-        JavaScript. The goal of it is to apply newly learned concepts and showcase them as a portfolio
-        of my current mastery of these languages. Please, be aware that this website utilizes cookies.
-    </p>
-
-    <p>All registered users can login and logout. Pre-registered users all have the password: "hello".
-        Specific user features are still to be implemented. Anyone can create a user and log in into the system.
-    </p>
-
-    <p>
-        Please note, website still hasn't been optimized for security and cookies are being used to keep track
-        of user information, besides GETs and POSTs. A more secure version is to be implemented that will use
-        sessions instead.
-    </p>
-
-    <p>
-        Anyone can view the data populated in the tables, specifically the current users and the forums
-        themselves, which are made of threads and messages within the threads. Please, be aware there is no
-        way to add, edit, or delete messages or threads at the moment.
-        Anyone can access the "Manage Users" page, but only an admin can edit or update users.
-    </p>
-
-    <p>The source code can be found <a href="https://github.com/martinsuas/game-o_forum">here on GitHub</a>. Please
-    contact me if you have any questions.</p>
-
-    <p>A lot more updates to come soon! But here are a few things I plan to implement:
-    <ul>
-        <li>User uploaded images to use as an avatar.</li>
-        <li>Private messages and friendships between users.</li>
-        <li>Increased security through more secure methods.</li>
-        <li>User information that synchronizes with another table related to a game.</li>
-        <li>JavaScript to make the website more dynamic and appealing.</li>
-    </ul>
-    </p>
-
-</div>
-
-
 <?php
-include('includes/footer.html'); ?>
 
-		
+require_once '../vendor/autoload.php';
+
+$app = new \Silex\Application();
+// @todo figure how to install silex PHPStorm support
+//$app->register(new Sorien\Provider\PimpleDumpProvider());
+$app['debug'] = true;
+
+
+// LESSON 1
+$app->get('/', function() {
+    return new Symfony\Component\HttpFoundation\Response('Hello!');
+});
+//
+// LESSON 2
+$app->get("/users/{id}", function($id) {
+    return "User - {$id}";
+})
+    ->value('id', 0) // default
+    ->assert('id', "\d+"); //
+;
+
+
+// LESSON 3 Routing & Dynamic ROuting
+$messages = [
+    1 => [
+        'date' => '2016-11-17',
+        'name' => 'Lily',
+        'title' => 'I like pie',
+        'body' => "It's so good!"
+    ],
+    2 => [
+        'date' => '2016-11-18',
+        'name' => 'Gog',
+        'title' => 'I like ham',
+        'body' => "It's so smoked!"
+    ],
+];
+
+$app->get('/thread', function() use ($messages) {
+    $output = '';
+    foreach ($messages as $m) {
+        $output .= $m['title'];
+        $output .= "<br/ >";
+    }
+    return $output;
+});
+
+$app->get('/thread/{id}', function (Silex\Application $app, $id) use ($messages) {
+    if (!isset($messages[$id])) {
+        $app->abort(404, "Post $id does not exist");
+    }
+
+    $post = $messages[$id];
+
+    return "<h1>{$post['title']}</h1>" .
+            "<p>{$post['body']}</p>";
+});
+//
+
+// Lesson 4
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$app->post("/feedback", function (Request $request) {
+
+    $message = 'lala'; //$request->get('message');
+
+    mail('martin.suas@gmail.com', '[YourSite] Feedback', $message);
+
+    return new Response('Thank you for your feedback!', 201);
+});
+
+//
+
+
+$app->get("/feedback2", function (Silex\Application $app, $id)  {
+    $mail = new PHPMailer();
+    $mail->Host ='smtp.gmail.com';
+    $mail->SMTPAuth = true; // Allow SMTP authentication
+    $mail->Username = 'martin.suas.dev@gmail.com';
+    $mail->Password = 'celular1';
+    $mail->SMTPSecure = 'tls'; // Chose encryption, could also be ssl
+    $mail->Port = 587;
+
+    $mail->setFrom('martin.suas.dev@gmail.com', 'Weekly Reporter');
+    $mail->addAddress('martin.suas.qa@gmail.com','Sanjay Hoerer');
+    $mail->addReplyTo('martin.suas@gmail.com', 'Information');
+    $mail->addBCC('martin.suas.dev@gmail.com', 'Martin Suarez');
+
+    $mail->addAttachment(__DIR__ . '/../resources/download/silly_text.txt', 'actually_this.txt');
+    $mail->isHTML(true);
+
+    $mail->Subject ="Your August Weekly Report";
+    $mail->Body = "<h1>Your August Weekly Report is here!</h1>
+<p>Please, tell us how we did after you see this wonderful report down here.</p>";
+    $mail->AltBody = $mail->Body;
+
+    // UGLY! ignore
+    //mail('martin.suas@gmail.com', '[YourSite] Feedback', 'lala');
+
+    if ($mail->send()) {
+        $message = 'Message sent successful! Arigato!';
+    } else {
+        $message = 'Mailer Error: ' . $mail->ErrorInfo;
+    }
+    return $message;
+});
+
+
+$app->run();

@@ -1,0 +1,23 @@
+# Functionality:
+# - password protect passwords      - redirect users automatically      - custom error pages
+# - changing file extensions        - banning users with certain IP     - allow users with certain IP
+# - stop directory listings
+
+ErrorDocument 404 /404.html
+# deny from <ipaddress>
+# allow from 127.0.0.1
+
+#DirectoryIndex homepage.php
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    #Comment to use index in main site
+    #RewriteBase /silex/index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+# Alternative to above lModule. @todo Replace once you understand why
+# FallbackResource index.php
+

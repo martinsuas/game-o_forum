@@ -1,0 +1,7 @@
+{
+    "require": {
+		"phpmailer/phpmailer": "~5.2",
+        "silex/silex": "~2.0",
+        "sorien/silex-pimple-dumper": "~2.0"
+    }
+}
