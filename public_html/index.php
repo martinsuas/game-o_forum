@@ -76,6 +76,7 @@ $app->post("/feedback", function (Request $request) {
 
 
 $app->get("/feedback2", function (Silex\Application $app, $id)  {
+    /**
     $mail = new PHPMailer();
     $mail->Host ='smtp.gmail.com';
     $mail->SMTPAuth = true; // Allow SMTP authentication
@@ -106,6 +107,7 @@ $app->get("/feedback2", function (Silex\Application $app, $id)  {
         $message = 'Mailer Error: ' . $mail->ErrorInfo;
     }
     return $message;
+     * *//
 });
 
 
