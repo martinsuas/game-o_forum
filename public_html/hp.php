@@ -107,7 +107,7 @@ $app->get("/feedback2", function (Silex\Application $app, $id)  {
         $message = 'Mailer Error: ' . $mail->ErrorInfo;
     }
     return $message;
-     * *//
+     * */
 });
 
 
