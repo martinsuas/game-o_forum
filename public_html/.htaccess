@@ -14,6 +14,7 @@ ErrorDocument 404 /404.html
     RewriteEngine On
     #Comment to use index in main site
     #RewriteBase /silex/index.php
+    RewriteBase /index.php
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]

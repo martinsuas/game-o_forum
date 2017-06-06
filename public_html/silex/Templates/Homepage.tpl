@@ -2,12 +2,12 @@
 		# Created 01/11/2016
 		# Created by Martin Suarez
 		# This script experiments with using multiple files.
-		# 
+		#
 		# Script 3.7 - update #2
 		# Created 02/26/2016
 		# Created by Martin Suarez
 		# Added functions to the website
-		
+
 // Adds an ad.
 function create_ad() {
 	echo '<p class="ad">ADVERTISEMENT!</p>';
@@ -15,7 +15,7 @@ function create_ad() {
 $page_title = "Homepage";
 include('includes/header.html');
 
- ?>
+?>
 <div id="c_content">
     <h1>Welcome</h1>
     <h2>About this website...</h2>
@@ -42,7 +42,7 @@ include('includes/header.html');
     </p>
 
     <p>The source code can be found <a href="https://github.com/martinsuas/game-o_forum">here on GitHub</a>. Please
-    contact me if you have any questions.</p>
+        contact me if you have any questions.</p>
 
     <p>A lot more updates to come soon! But here are a few things I plan to implement:
     <ul>
@@ -60,4 +60,3 @@ include('includes/header.html');
 <?php
 include('includes/footer.html'); ?>
 
-		

@@ -120,7 +120,8 @@ if ($stmt) {
 				<td><b>Author</b>
 				<td><b>Date Created</b></td></tr>';
 
-        while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        //while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
             echo '<tr>' .
                 '<td><a href="thread.php?thread_id=' . $row['thread_id'] . '">' .
                 $row['title'] . '</a></td>' .
