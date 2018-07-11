@@ -1,9 +1,6 @@
-# game-o_forum
-Welcome to Game-O Forum!
+# game-o_forum (Discontinued)
 
-The actual website created with this source code can be found at:
-http://martin-suarez.com/index.php
+Project was rewritten in Java EE to reflect more RESTful practices.
 
-Contact me if you have any questions!
-
-Martin
+Check:
+https://github.com/martinsuas/GameoForum-API
